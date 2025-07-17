@@ -2,6 +2,7 @@ import { toast } from 'react-toastify';
 import { create } from "zustand";
 import type { Product } from "../model/type";
 import { axiosInstance } from "../../../shared/api/axiosInstance";
+import { useAuthStore } from '../../auth/store/auth';
 
 interface ProductsState {
     products: Product[];

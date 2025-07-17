@@ -43,7 +43,6 @@ export const useAuthStore = create<AuthStore>((set) => ({
         
         try {
             const resp = await authApi.checkAuth();
-            console.log(resp);
             set({ user: resp, token: token });
             return true;
         } catch(error) {

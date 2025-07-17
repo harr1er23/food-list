@@ -1,5 +1,3 @@
-import type { User } from "../../../entities/user";
-
 export interface Product {
     id: number;
     name: string;
@@ -8,5 +6,5 @@ export interface Product {
     carbs: number;
     calories: number;
     description: string;
-    author: User;
+    user_id: number;
 }
