@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, PasswordInput, TextInput } from "@mantine/core";
 import { toast } from "react-toastify";
 import { useAuthStore } from '../store/auth';
+import { Lock, User } from 'lucide-react';
 
 export const RegistrationForm = () => {
     const { registration } = useAuthStore();
@@ -11,7 +12,6 @@ export const RegistrationForm = () => {
         resolver: zodResolver(FormRegisterSchema),
         defaultValues: {
             email: '',
-            name: '',
             pass: '',
             confirmPass: ''
         }
@@ -19,7 +19,7 @@ export const RegistrationForm = () => {
 
     const onSubmit = async (data: TFormRegisterValue) => {
         try {
-            await registration(data.email, data.name, data.pass);
+            await registration(data.email, data.pass);
 
             toast.success("Регистрация успешна!");
         } catch(err) {
@@ -31,37 +31,30 @@ export const RegistrationForm = () => {
     return (
         <FormProvider {...form}>
             <form
+                className='flex flex-col gap-2'
                 onSubmit={form.handleSubmit(onSubmit)}>
                     <TextInput
                         {...form.register('email')}
-                        label="Почта"
                         type="email"
+                        leftSection={<User />}
                         error={form.formState.errors.email?.message}
-                        placeholder="example@mail.com"
-                    />
-
-                    <TextInput
-                        {...form.register('name')}
-                        label="Имя"
-                        type="text"
-                        error={form.formState.errors.name?.message}
-                        placeholder="Иван"
+                        placeholder="Email"
                     />
 
                     <PasswordInput
                         {...form.register('pass')}
                         type="password"
-                        label="Пароль"
+                        leftSection={<Lock />}
                         error={form.formState.errors.pass?.message}
-                        placeholder="●●●●●●●●"
+                        placeholder="Password"
                         />
 
                     <PasswordInput
                         {...form.register('confirmPass')}
                         type="password"
-                        label="Пароль"
+                        leftSection={<Lock />}
                         error={form.formState.errors.confirmPass?.message}
-                        placeholder="●●●●●●●●"
+                        placeholder="Confirm password"
                     />
 
                     <Button

@@ -6,7 +6,7 @@ const AuthPage = () => {
   return (
     <Center className="h-screen bg-gray-50">
     <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
-      <h1 className="text-2xl font-bold text-center mb-6">Добро пожаловать</h1>
+      <h1 className="text-2xl font-bold text-center mb-6 text-[#12B886]">FoodList</h1>
         <Tabs defaultValue="login" className="max-w-md mx-auto">
           <Tabs.List grow>
             <Tabs.Tab value="login">Вход</Tabs.Tab>

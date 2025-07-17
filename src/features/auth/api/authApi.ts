@@ -13,7 +13,6 @@ type LoginRequest = {
 
 type RegisterRequest = {
     email: string;
-    name: string;
     pass: string;
 }
 
@@ -34,7 +33,6 @@ export const authApi = {
     registartion: async (data: RegisterRequest): Promise<AuthResponse> => {
         const resp = await axiosInstance.post(`/register`, {
             password: data.pass,
-            name: data.name,
             email: data.email,
         });
         return resp.data;

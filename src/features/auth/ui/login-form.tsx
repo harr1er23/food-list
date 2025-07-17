@@ -5,6 +5,7 @@ import { Button, PasswordInput, TextInput } from "@mantine/core";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from '../store/auth';
+import { User, Lock } from "lucide-react";
 
 export const LoginForm = () => {
     const navigate = useNavigate();
@@ -20,8 +21,7 @@ export const LoginForm = () => {
     const onSubmit = async (data: TFormLoginValue) => {
         try {
             await login(data.email, data.pass);
-            toast.success("Авторизация успешна!");
-            navigate('/map');
+            navigate('/');
         } catch(err) {
             console.error(err);
             toast.error("Ошибка авторизации! Проверьте данные для входа.");
@@ -31,21 +31,22 @@ export const LoginForm = () => {
     return (
         <FormProvider {...form}>
             <form 
+                className='flex flex-col gap-2'
                 onSubmit={form.handleSubmit(onSubmit)}>
                     <TextInput
                         {...form.register('email')}
-                        label="Почта"
                         type="email"
                         error={form.formState.errors.email?.message}
-                        placeholder="example@mail.com"
-                        />
+                        leftSection={<User />}
+                        placeholder="Example"
+                    />
 
                     <PasswordInput
                         {...form.register('pass')}
                         type="password"
-                        label="Пароль"
+                        leftSection={<Lock />}
                         error={form.formState.errors.pass?.message}
-                        placeholder="●●●●●●●●"
+                        placeholder="Password"
                     />
 
                     <Button

@@ -8,7 +8,7 @@ type AuthStore = {
     token: null | string;
     checkAuth: () => Promise<boolean>;
     login: (email: string, pass: string) => Promise<void>;
-    registration: (email: string, name: string, pass: string) => Promise<void>;
+    registration: (email: string, pass: string) => Promise<void>;
     logout: () => void;
 }
 
@@ -26,8 +26,8 @@ export const useAuthStore = create<AuthStore>((set) => ({
         }
 
     },
-    registration: async (email, name, pass) => {
-        const { token, data } = await authApi.registartion({ email, name, pass });
+    registration: async (email, pass) => {
+        const { token, data } = await authApi.registartion({ email, pass });
         set({user: data, token});
         localStorage.setItem('token', token);
     },
